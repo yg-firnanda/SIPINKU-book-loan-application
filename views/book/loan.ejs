@@ -1,0 +1,42 @@
+<div class="w-100 vh-100" id="outer">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="img-box text-center pt-3">
+                        <img src="<%= book.cover_url %>" class="card-img-top book-cover" alt="Book Cover | <%= book.name %>">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= book.title %> <span class="badge bg-primary text-white"><%= book.genre %></span></h5>
+                        <p class="card-text"><%= book.writer %></p>
+                        <p class="card-text"><%= book.description %></p>
+                        <p class="card-text">Waktu peminjaman buku :<br><span class="text-danger"><%= dateNow %></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h2>Form Peminjaman Buku</h2>
+                <form action="/loan/<%= book._id %>" method="post">
+                    <div class="form-group mb-3">
+                        <label for="nama">Nama Peminjam</label>
+                        <input type="text" class="form-control" id="nama" name="name" value="<%= userName %>" disabled>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="nama">Email Peminjam</label>
+                        <input type="text" class="form-control" id="nama" name="name" value="<%= userEmail%>" disabled>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="hidden" name="borrowDate" value="<%= dateNow %>">
+                        <label for="dueDate" class="form-label">Tenggat Waktu</label>
+                        <input type="date" class="form-control" id="dueDate" name="dueDate" min="<%= minDate %>" max="<%= maxDate %>">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="deskripsi">Deskripsi Peminjaman</label>
+                        <textarea class="form-control" id="deskripsi" name="deskripsi" rows="8"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ajukan Peminjaman</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

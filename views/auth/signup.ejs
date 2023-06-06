@@ -1,0 +1,32 @@
+<form action="/signup" method="POST">
+    <div class="form-control">
+        <label for="nama">Nama</label>
+        <input type="text" name="name">
+    </div>
+    <div class="form-control">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
+    </div>
+    <div class="form-control">
+        <label for="role">Role</label>
+        <select name="role" id="role">
+            <option value="pelajar">Pelajar</option>
+            <option value="karyawan swasta">Karyawan Swasta</option>
+            <option value="pns">PNS/ASN</option>
+            <option value="tenagapendidik">Tenaga Pendidik</option>
+        </select>
+    </div>
+    <div class="form-control">
+        <label for="instansi">Instansi</label>
+        <input type="text" name="agency" id="instansi">
+    </div>
+    <div class="form-control">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+    </div>
+    <div class="form-control">
+        <label for="confPassword">Confirm Password</label>
+        <input type="password" name="confPassword" id="confPassword">
+    </div>
+    <button type="submit">Signup</button>
+</form>

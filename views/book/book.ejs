@@ -1,0 +1,29 @@
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="img-box text-center">
+                <img src="<%= book.cover_url %>" class="book-cover" alt="Book Cover | <%= book.title %>">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2><%= book.title %></h2>
+            <p><strong>Genre:</strong> <%= book.genre %></p>
+            <p><strong>Penulis:</strong> <%= book.writer %></p>
+            <p><strong>Deskripsi:</strong> <%= book.description %></p>
+            <p><strong>Penerbit:</strong> <%= book.publisher %></p>
+            <p><strong>Tahun Terbit:</strong> <%= book.year_release %></p>
+            <% if(loanApprove === true) { %>
+                <a href="/preview/">
+                    <button class="btn btn-success">Baca Buku</button>
+                </a>
+            <% } else if(loanApprove === false) { %>
+                <button class="btn btn-secondary">Tunggu 1 hari</button>
+            <% } else if(loanApprove === null) { %>
+                <a href="/loan/<%= book._id %>">
+                    <button class="btn btn-primary">Pinjam Buku</button>
+                </a>
+            <% } %>
+        </div>
+    </div>
+</div>

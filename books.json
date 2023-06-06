@@ -1,0 +1,112 @@
+[
+    {
+        "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1677819154i/30550722.jpg",
+        "title": "Harry Potter and the Sorcerer's Stone",
+        "writer": "J.K. Rowling",
+        "genre": "Fantasy",
+        "description": "The first book in the Harry Potter series.",
+        "publisher": "Bloomsbury Publishing",
+        "year_release": 1997,
+        "pages": 320,
+        "language": "English"
+    },
+    {
+        "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1553383690i/2657.jpg",
+        "title": "To Kill a Mockingbird",
+        "writer": "Harper Lee",
+        "genre": "Fiction",
+        "description": "A classic novel set in the American South during the Great Depression.",
+        "publisher": "J.B. Lippincott & Co.",
+        "year_release": 1960,
+        "pages": 336,
+        "language": "English"
+    },
+    {
+        "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1320399351i/1885.jpg",
+        "title": "Pride and Prejudice",
+        "writer": "Jane Austen",
+        "genre": "Romance",
+        "description": "A beloved novel exploring themes of love, class, and societal expectations.",
+        "publisher": "T. Egerton, Whitehall",
+        "year_release": 1813,
+        "pages": 432,
+        "language": "English"
+    },
+    {
+        "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1657781256i/61439040.jpg",
+        "title": "1984",
+        "writer": "George Orwell",
+        "genre": "Dystopian",
+        "description": "A dystopian novel depicting a totalitarian regime and the power of government surveillance.",
+        "publisher": "Secker & Warburg",
+        "year_release": 1949,
+        "pages": 328,
+        "language": "English"
+    },
+    {
+        "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1490528560i/4671.jpg",
+        "title": "The Great Gatsby",
+        "writer": "F. Scott Fitzgerald",
+        "genre": "Classic",
+        "description": "A story of wealth, love, and the American Dream set in the Roaring Twenties.",
+        "publisher": "Charles Scribner's Sons",
+        "year_release": 1925,
+        "pages": 180,
+        "language": "English"
+    },
+    {
+        "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1546071216i/5907.jpg",
+        "title": "The Hobbit",
+        "writer": "J.R.R. Tolkien",
+        "genre": "Fantasy",
+        "description": "A fantasy novel following the adventures of Bilbo Baggins in Middle-earth.",
+        "publisher": "George Allen & Unwin",
+        "year_release": 1937,
+        "pages": 310,
+        "language": "English"
+    },
+    {
+        "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1398034300i/5107.jpg",
+        "title": "The Catcher in the Rye",
+        "writer": "J.D. Salinger",
+        "genre": "Coming-of-age",
+        "description": "A coming-of-age novel narrated by a teenager dealing with the challenges of growing up.",
+        "publisher": "Little, Brown and Company",
+        "year_release": 1951,
+        "pages": 224,
+        "language": "English"
+    },
+    {
+        "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1566425108i/33.jpg",
+        "title": "The Lord of the Rings",
+        "writer": "J.R.R. Tolkien",
+        "genre": "Fantasy",
+        "description": "A trilogy that follows the journey of a group of characters in a fictional world.",
+        "publisher": "George Allen & Unwin",
+        "year_release": 1954,
+        "pages": 1178,
+        "language": "English"
+    },      
+    {
+        "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1557343311i/10210.jpg",
+        "title": "Jane Eyre",
+        "writer": "Charlotte Brontë",
+        "genre": "Gothic",
+        "description": "A Gothic novel featuring a strong female protagonist and themes of love and independence.",
+        "publisher": "Smith, Elder & Co.",
+        "year_release": 1847,
+        "pages": 594,
+        "language": "English"
+    },
+    {
+        "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1654371463i/18144590.jpg",
+        "title": "The Alchemist",
+        "writer": "Paulo Coelho",
+        "genre": "Fantasy",
+        "description": "A novel about a young shepherd who embarks on a journey to discover his personal legend.",
+        "publisher": "HarperCollins",
+        "year_release": 1988,
+        "pages": 208,
+        "language": "English"
+    }
+]

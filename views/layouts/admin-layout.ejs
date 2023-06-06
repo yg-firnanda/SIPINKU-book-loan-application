@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="sb-nav-fixed">
+    <%- include('../partials/admin-nav.ejs') %>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <a class="nav-link" href="/admin">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Admin Menu</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Data Buku
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                            <div class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <nav class="nav">
+                                    <a class="nav-link" href="/admin/books">Koleksi Buku</a>
+                                    <a class="nav-link" href="/admin/add-book">Tambah Buku</a>
+                                </nav>
+                            </div>
+                        </div>
+                        <a class="nav-link" href="/admin/loans" aria-expanded="false">
+                            <div class="sb-nav-link-icon"><i class="fa-regular fa-user"></i></div>
+                            Data Peminjam
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer bg-transparent">
+                    <form action="/logout-admin" method="post">
+                        <button type="submit" class="border-0 bg-transparent text-secondary">
+                            <i class="uil uil-signout"></i>Keluar
+                        </button>
+                    </form>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as: Admin</div>
+                </div>
+            </nav>
+        </div>
+            <div id="layoutSidenav_content">
+                
+                <%- body %>
+                <%- include('../partials/admin-footer.ejs') %>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+        <script src="/js/scripts.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="/js/datatables-simple-demo.js"></script>
+    </body>
+</html>

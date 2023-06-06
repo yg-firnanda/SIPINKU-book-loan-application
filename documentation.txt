@@ -1,0 +1,40 @@
+1. Pemanggilan express-ajs-layouts Tidak menggunakan ()
+app.use(layouts);       [BENAR]
+app.use(layouts());     [SALAH]
+
+2. Penggunakan router harus menggunakan penjelasan, misal router.get, router.post . Bukan hanya router('/', ...). Ini SALAH
+
+3. 
+app.use((req, res, next) => {
+    if(req.session.user) {
+        User.findById(req.session.user._id) <----- Karena kita menggunakan MongoDB, maka penulisan id adalah _id
+            .then(user => {
+                req.user = user;
+                next(); <----- JANGAN LUPA TAMBAHKAN NEXT!!!
+            })
+            .catch(err => console.log(err));
+    } else {
+        next();
+    }
+})
+
+4. 
+app.use((req, res, next) => {
+    res.locals.isAuthenticated = req.session.isLoggedIn; <----- req.SESSION.isLoggedIn, jangan lupa sessionnya ditulis
+    next();
+})
+
+5. 
+
+>> req.session.user will generate when user login
+>> Pass req.user in controller as user data inside object of render, then send the value through the EJS
+
+
+* Improvement Needs
+- When user's loan reject, add countdown for several days
+- When user's loan approve, add countdown depend the dueDate of user loan.
+- Add sendgrid mail whenever the user's loan approved or rejected as well
+- Make a loan history of user.
+- Add search book in admin and homepage
+- When loan dueDate is over the loan data will be removed in admin
+- Adding Oauth for user registration and login

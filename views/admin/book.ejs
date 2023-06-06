@@ -1,0 +1,28 @@
+<div class="container">
+    <h2>Detail Book</h2>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="<%= book.cover_url %>" alt="Book Cover | <%= book.title %>" class="book-cover">
+                </div>
+                <div class="col-md-8">
+                    <h5 class="card-title"><%= book.title %></h5>
+                    <p class="card-text">Penulis: <%= book.writer %></p>
+                    <p class="card-text">Deskripsi Buku: <%= book.description %></p>
+                    <p class="card-text">Genre: <%= book.genre %></p>
+                    <p class="card-text">Penerbit: <%= book.publisher %></p>
+                    <p class="card-text">Tahun: <%= book.year_release%></p>
+                    <p class="card-text">Halaman: <%= book.pages%></p>
+                    <p class="card-text">Bahasa: <%= book.language %></p>
+                    <div class="text-right d-flex">
+                        <a href="/admin/book/edit/<%= book._id %>" class="btn btn-warning ">Edit</a>
+                        <form action="/admin/book/delete/<%= book._id %>" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

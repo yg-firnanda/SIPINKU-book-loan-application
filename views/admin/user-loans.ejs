@@ -1,0 +1,67 @@
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Data Peminjaman Buku</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+            <li class="breadcrumb-item active">Tables</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Tabel Peminjaman Buku
+            </div>
+            <div class="card-body">
+                <table class="table" id=""datatablesSimple>
+                    <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Nama</th>
+                                <th scope="col">Buku</th>
+                                <th scope="col">Tenggat Pengembalian</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (loans.length > 0 ) { let i = 1; %>
+                                <% for(let loan of loans) { %>
+                                <tr>
+                                    <th scope="row"><%= i %></th>
+                                    <td><%= loan.user.name %></td>
+                                    <td><%= loan.book.title %></td>
+                                    <td><%= loan.remainingTime %> tersisa</td>
+                                    <td>
+                                        <% if(loan.isApproved === true ) { %>
+                                            <p class="text-success">Approved</p>
+                                        <% } else if(loan.isApproved === false) { %>
+                                            <p class="text-danger">Rejected</p>
+                                        <% } else { %>
+                                            <div class="d-flex">
+                                                <form action="/admin/approve/<%= loan._id %>" method="POST">
+                                                    <button type="submit" class="btn btn-success">Approve</button>
+                                                </form>
+                                                <form action="/admin/reject/<%= loan._id %>" method="POST">
+                                                    <button type="submit" class="btn btn-danger">Reject</button>
+                                                </form>
+                                            </div>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex">
+                                            <form action="/admin/loans/detail/<%= loan._id %>">
+                                                <button type="submit" class="btn btn-warning">Detail</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% i++ %>
+                                <% }; %>
+                            <% } else { %>
+                                <p class="text center w-100">Tidak ada peminjam</p>
+                            <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>

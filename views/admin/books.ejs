@@ -1,0 +1,18 @@
+<div class="container ml-5 mt-2">
+  <h2>List Koleksi Buku</h2>
+  <div class="row">
+    <% books.forEach(book => { %>
+      <div class="col-md-3">
+        <div class="card book-card" style="width: 15rem">
+          <div class="book-item">
+            <img src="<%= book.cover_url %>" class="card-img-top" alt="<%= book.title %>">
+            <a href="/admin/book/<%= book._id %>" class="text-black text-decoration-none">
+              <h4><%= book.title %></h4>
+            </a>
+            <p><%= book.writer %> | <%= book.year_release %></p>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>

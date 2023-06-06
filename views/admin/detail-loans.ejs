@@ -1,0 +1,33 @@
+<div class="container">
+    <h1>Detail Loan</h1>
+    <hr>
+
+    <% loans.forEach(loan => { %>
+        <div class="row">
+            <div class="col-md-6">
+              <h5 class="card-title">Name: <%= loan.user.name %></h5>
+              <p class="card-text">Email: <%= loan.user.email %></p>
+            </div>
+            <div class="col-md-6">
+              <p class="card-text">Pekerjaan: <%= loan.user.role %></p>
+              <p class="card-text">Instansi: <%= loan.user.agency %></p>
+            </div>
+        </div>
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="img-box text-center">
+                <img src="<%= loan.book.cover_url %>" class="book-cover" alt="Book Cover | <%= loan.book.title %>">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2><%= loan.book.title %></h2>
+            <p><strong>Genre:</strong> <%= loan.book.genre %></p>
+            <p><strong>Penulis:</strong> <%= loan.book.writer %></p>
+            <p><strong>Deskripsi:</strong> <%= loan.book.description %></p>
+            <p><strong>Penerbit:</strong> <%= loan.book.publisher %></p>
+            <p><strong>Tahun Terbit:</strong> <%= loan.book.year_release %></p>
+    </div>
+    <% }) %>
+
+  </div>

@@ -1,0 +1,42 @@
+<div class="container">
+    <h2>Form Penambahan Data Buku</h2>
+    <form action="/admin/book/edit/<%= book._id %>" method="POST">
+        <div class="form-group mb-3">
+            <label for="image">URL cover buku</label>
+            <input type="text" class="form-control" name="cover_url" id="image" value="<%= book.cover_url %>" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="judul">Judul Buku</label>
+            <input type="text" class="form-control" id="judul" name="title" value="<%= book.title %>" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="genre">Genre</label>
+            <input type="text" class="form-control" id="genre" name="genre" value="<%= book.genre %>" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="penulis">Penulis</label>
+            <input type="text" class="form-control" id="penulis" name="writer" value="<%= book.writer %>" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="deskripsi">Deskripsi</label>
+            <textarea class="form-control" id="deskripsi" name="description" rows="6" required><%= book.description %></textarea>
+        </div>
+        <div class="form-group mb-3">
+            <label for="tahun">Penerbit</label>
+            <input type="text" class="form-control" id="tahun" name="publisher" value="<%= book.publisher %>" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="tahun">Tahun Terbit</label>
+            <input type="number" class="form-control" id="tahun" name="year_release" value="<%= book.year_release %>" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="tahun">Jumlah Halaman</label>
+            <input type="number" class="form-control" id="tahun" name="pages" value="<%= book.pages %>" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="tahun">Bahasa</label>
+            <input type="text" class="form-control" id="tahun" name="language" value="<%= book.language %>" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Edit Buku</button>
+    </form>
+</div>
