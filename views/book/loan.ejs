@@ -1,4 +1,4 @@
-<div class="w-100 vh-100" id="outer">
+<div class="w-100 vh-100" style="margin-top: 9rem;" id="outer">
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-4">
@@ -23,7 +23,11 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="nama">Email Peminjam</label>
-                        <input type="text" class="form-control" id="nama" name="name" value="<%= userEmail%>" disabled>
+                        <input type="text" class="form-control" id="nama" name="email" value="<%= userEmail %>" disabled>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="nama">Alamat Lengkap Peminjam</label>
+                        <input type="text" class="form-control" id="nama" name="address" value="<%= userAddress %>" disabled>
                     </div>
                     <div class="form-group mb-3">
                         <input type="hidden" name="borrowDate" value="<%= dateNow %>">
@@ -32,10 +36,17 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="deskripsi">Deskripsi Peminjaman</label>
-                        <textarea class="form-control" id="deskripsi" name="deskripsi" rows="8"></textarea>
+                        <textarea class="form-control" id="deskripsi" name="descriptionOfNeeds" rows="8" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Ajukan Peminjaman</button>
+                    <div class="d-flex gap-4">
+                        <button type="submit" class="btn btn-primary">Ajukan Peminjaman</button>
+                        <p style="position: relative; top: 10px;">Baca: <a href="/pages/policy">Kebijakan peminjaman buku</a></p>
+                    </div>
                 </form>
+                <div class="alert alert-danger mt-4" role="alert">
+                    <span class="fw-bold">PERINGATAN:</span><br>
+                    Penting bagi Anda untuk mempertimbangkan buku yang Anda pinjam. Peminjaman buku <span class="fw-bold">gratis</span> tidak dipungut biaya. Untuk pengiriman buku, Anda tetap akan dikenakan ongkos kirim berdasarkan wilayah pengiriman, serta denda apabila terlambat mengembalikan buku.
+                </div>
             </div>
         </div>
     </div>

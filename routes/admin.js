@@ -15,6 +15,7 @@ router.get('/add-book', adminAuth, adminController.getAddBook);
 router.post('/add-book', adminAuth, adminController.postAddBook);
 router.get('/loans', adminAuth, adminController.getLoans);
 router.get('/loans/detail/:loanId', adminController.getLoansDetail);
+router.post('/loans/detail/:loanId', adminController.postLoansDetail);
 router.post('/approve/:loanId', adminAuth, adminController.postApproveLoan);
 router.post('/reject/:loanId', adminAuth, adminController.postRejectLoan);
 

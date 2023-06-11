@@ -6,16 +6,37 @@ const Book = require('../models/Book');
 const Loan = require('../models/Loan');
 const { countdownRejectLoan } = require('../utils/timeRemain');
 
-exports.getBooks = (req, res) => {
-    Book.find()
-        .then(books => {
-            res.render('book/books', {
+exports.getIndex = (req, res) => {
+    const categories = [
+        { genre: 'Romance', limit: 4 },
+        { genre: 'Comedy', limit: 4 },
+        { genre: 'Horor', limit: 4 },
+        { genre: 'Fantasy', limit: 4 },
+        { genre: 'History', limit: 4 }
+    ];
+
+    const categoryPromises = categories.map(category => {
+        return Book.find({ genre: category.genre }).limit(category.limit);
+    });
+
+    Promise.all(categoryPromises)
+        .then(categoryBook => {
+            res.render('book/index', {
                 pageTitle: 'Homepage',
                 layout: 'layouts/main-layout',
-                books: books
+                path: '/',
+                categoryBook
             });
         })
         .catch(err => console.log(err));
+};
+
+exports.getBooks = (req, res) => {
+    res.render('book/books', {
+        pageTitle: 'Koleksi Buku',
+        layout: 'layouts/main-layout',
+        path: '/koleksi'
+    });
 };
 
 exports.getBook = (req, res) => {
@@ -31,30 +52,41 @@ exports.getBook = (req, res) => {
             loanQuery['user.email'] = req.user.email;
         }
 
-        return Loan.findOne(loanQuery);
+        // return Loan.findOne(loanQuery);
+        return Loan.findById(bookId);
     })
     .then(loan => {
+        // When user dont login and when user not loan anything yet, then we set the value to "loan"
         if(!req.user) {
             if(loan) {
-                loan.isApproved = null;
+                loan.isApproved = "loan";
+
+                const currenTime = moment();
+                const borrowDate = moment(loan.borrowDate)
+                if(currenTime.isAfter(borrowDate)) {
+                    loan.isApproved = "loan"
+                }
             }
         }
+
+        const timeADay = moment(loan ? loan.borrowDate : '').add(1, 'days').calendar({
+            sameDay: '[hari ini pukul] HH:mm',
+            nextDay: '[besok pada pukul] HH:mm'
+        });
+
+        isFine = req.user ? req.user.isFine : null;
+        
         res.render('book/book', {
             pageTitle: "Detail Page",
             layout: 'layouts/main-layout',
+            path: `/book/${matchBook._id}`,
             book: matchBook,
-            loanApprove: loan ? loan.isApproved : null
-        })
+            loanApprove: loan ? loan.isApproved : "loan",
+            timeADay, isFine
+        });
     })
     .catch(err => console.log(err));
 }
-
-exports.getProfile = (req, res) => {
-    res.render('book/profile', {
-        pageTitle: 'My Profile',
-        layout: 'layouts/main-layout'
-    });
-};
 
 exports.getLoan = (req, res) => {
     const date = moment().toDate();
@@ -64,6 +96,7 @@ exports.getLoan = (req, res) => {
 
     const userName = req.user.name;
     const userEmail = req.user.email;
+    const userAddress = req.user.address;
     const bookId = req.params.bookId;
 
     Book.findById(bookId)
@@ -78,14 +111,13 @@ exports.getLoan = (req, res) => {
             res.render('book/loan', {
                 pageTitle: 'Loans',
                 layout: 'layouts/main-layout',
-                pageUrl: '/book/loan._id',
+                path: `/loan/${book._id}`,
                 book, dateNow, minDate, maxDate,
-                userName, userEmail
+                userName, userEmail, userAddress
             });
         })
         .catch(err => console.log(err))
-    }
-;
+}
 
 exports.postLoan = (req, res) => {
     const userId = req.user._id
@@ -97,12 +129,19 @@ exports.postLoan = (req, res) => {
         Book.findById(bookId).lean().exec()
     ])
     .then(([user, book]) => {
+        const currentDate = moment();
+        const selectedDate = moment(dueDate, 'YYYY-MM-DD');
+        selectedDate.set({
+            hour: currentDate.hour(),
+            minute: currentDate.minute()
+        });
         const loan = new Loan({
             user: {
                 name: user.name,
                 email: user.email,
                 role: user.role,
                 agency: user.agency,
+                address: user.address,
                 password: user.password
             },
             book: {
@@ -119,14 +158,120 @@ exports.postLoan = (req, res) => {
             },
             descriptionOfNeeds,
             borrowDate,
-            dueDate,
-            isApproved: null
+            dueDate: selectedDate.toDate(),
+            isApproved: "pending"
         });
         return loan.save()
     })
     .then(result => {
         console.log("Peminjaman Diajukan");
-        res.redirect(`/book/${bookId}`)
+        // res.redirect(`/book/${bookId}`);
+        res.redirect('/profile/loans')
     })
     .catch(err => console.log(err));
+}
+
+exports.getCategory = (req, res) => {
+    const categories = [
+        { genre: 'Romance', limit: 1 },
+        { genre: 'Comedy', limit: 1 },
+        { genre: 'Horor', limit: 1 },
+        { genre: 'Fantasy', limit: 1 },
+        { genre: 'History', limit: 1 }
+    ];
+
+    const categoryPromise = categories.map(category => {
+        return Book.find({ genre: category.genre }).limit(category.limit);
+    });
+    Promise.all(categoryPromise)
+        .then(books => {
+            res.render('book/category', {
+                pageTitle: 'Kategori Buku',
+                layout: 'layouts/main-layout',
+                books
+            })
+        })
+        .catch(err => console.log(err))
+}
+
+// GET BOOKS BY GENRE
+
+exports.getBooksRomance = (req, res) => {
+    let bookGenre;
+    Book.find({ 'genre': 'Romance' })
+        .then(books => {
+            books.forEach(book => {
+                bookGenre = book.genre
+            })
+            res.render('book/books', {
+                pageTitle: 'Genre Romansa',
+                layout: 'layouts/main-layout',
+                books, bookGenre
+            });
+        })
+        .catch(err => console.log(err));
+}
+
+exports.getBooksHistory = (req, res) => {
+    let bookGenre;
+    Book.find({ 'genre': 'Horor' })
+        .then(books => {
+            books.forEach(book => {
+                bookGenre = book.genre
+            })
+            res.render('book/books', {
+                pageTitle: 'Genre Horror',
+                layout: 'layouts/main-layout',
+                books, bookGenre
+            });
+        })
+        .catch(err => console.log(err));
+}
+
+exports.getBooksComedy = (req, res) => {
+    let bookGenre;
+    Book.find({ 'genre': 'Comedy' })
+        .then(books => {
+            books.forEach(book => {
+                bookGenre = book.genre
+            })
+            res.render('book/books', {
+                pageTitle: 'Genre Komedi',
+                layout: 'layouts/main-layout',
+                books, bookGenre
+            });
+        })
+        .catch(err => console.log(err));
+}
+
+exports.getBooksFantasy = (req, res) => {
+    let bookGenre;
+    Book.find({ 'genre': 'Fantasy' })
+        .then(books => {
+            books.forEach(book => {
+                bookGenre = book.genre
+            })
+            res.render('book/books', {
+                pageTitle: 'Genre Fantasi',
+                layout: 'layouts/main-layout',
+                books, bookGenre
+            });
+        })
+        .catch(err => console.log(err));
+}
+
+exports.getBooksHorror = (req, res) => {
+    let bookGenre;
+    Book.find({ 'genre': 'History' })
+        .then(books => {
+            books.forEach(book => {
+                bookGenre = book.genre
+            })
+            res.render('book/books', {
+                pageTitle: 'Genre Sejarah',
+                layout: 'layouts/main-layout',
+                books, bookGenre
+            });
+        })
+        .catch(err => console.log(err));
 }

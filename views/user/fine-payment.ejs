@@ -1,0 +1,36 @@
+<div class="container w-50" style="margin-top: 9rem; margin-bottom: 9rem;">
+    <div class="d-flex justify-content-between align-items-center w-100 mb-4">
+        <h3>Form Pembayaran Denda</h3>
+        <div class="nominal">
+            <span>Nominal denda:</span>
+            <h3 class="text-danger fw-bold">Rp25.900</h3>
+        </div>
+    </div>
+    <form action="/loan/fine-payment/<%= user._id %>" method="post">
+        <div class="form-group mb-3">
+            <label for="name">Nama Peminjam</label>
+            <input type="text" class="form-control" id="name" name="name" value="<%= user.name %>" disabled>
+        </div>
+        <div class="form-group mb-3">
+            <label for="amount">Jumlah Denda</label>
+            <input type="number" class="form-control" id="amount" name="amount" min="0" step="0.01" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="paymentMethod">Metode Pembayaran</label>
+            <select class="form-control" id="paymentMethod" name="paymentMethod" required>
+                <option value="">Pilih Metode Pembayaran</option>
+                <option value="Credit Card">Kartu Kredit</option>
+                <option value="Bank Transfer">Transfer Bank</option>
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <label for="bankAccount">Nomor Rekening</label>
+            <input type="text" class="form-control" id="bankAccount" name="bankAccount" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="lateReason">Alasan Keterlambatan</label>
+            <textarea class="form-control" id="lateReason" name="lateReason" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mt-3">Bayar Denda</button>
+    </form>
+</div>

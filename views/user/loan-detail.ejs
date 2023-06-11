@@ -1,0 +1,77 @@
+
+<div class="container" style="margin: 9rem 0;">
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="img-box text-center">
+                <img src="<%= loan.book.cover_url %>" class="book-cover w-50" alt="Book Cover | <%= loan.book.title %>">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2><%= loan.book.title %></h2>
+            <p><strong>Genre:</strong> <%= loan.book.genre %></p>
+            <p><strong>Penulis:</strong> <%= loan.book.writer %></p>
+            <p><strong>Deskripsi:</strong> <%= loan.book.description %></p>
+            <p><strong>Penerbit:</strong> <%= loan.book.publisher %></p>
+            <p><strong>Tahun Terbit:</strong> <%= loan.book.year_release %></p>
+            <% if(loan.isApproved === 'approve') { %>
+                <% if(loan.isPaid === 'notPaid') { %>
+                    <a href="/loan/payment/<%= loan._id %>">
+                        <button class="btn btn-success">Bayar Sekarang</button>
+                    </a>
+                <% } else if(loan.isPaid === 'cancel') { %>
+                    <button class="btn btn-danger" disabled>Dibatalkan</button>
+                <% } else if(loan.isPaid === 'paid') { %>
+                    <% if(loan.isSent === 'dikemas') { %>
+                        <button class="btn btn-warning disabled">Sedang Diproses</button>
+                    <% } else if(loan.isSent === 'dikirim') { %>
+                        <div class="d-flex gap-3">
+                            <button class="btn btn-warning disabled">Sedang Dikirim</button>
+                            <form action="/loan/detail/<%= loan._id %>" method="POST">
+                                <button type="submit" class="btn btn-primary">Konfirmasi Buku Sudah Sampai</button>
+                            </form>
+                        </div>
+                    <% } else if(loan.isSent === 'diterima') { %>
+                        <% if(loan.isReturn === false) { %>
+                            <form action="/loan/detail/<%= loan._id %>" method="post">
+                                <button class="btn btn-danger">Kembalikan Buku</button>
+                            </form>
+                            <!-- <% // if(loan.isLate === false ) { %>
+                                <% // const months = ['Januari', 'Februari','Maret', 'April', 'Mei', 'Juni', 'Juli','Agustus', 'September', 'Oktober', 'November', 'Desember']; %>
+                                <p class="mt-3">Kembalikan buku sebelum <span class="text-danger fw-bold"><%= // loan.dueDate.getDate() %> <%= // months[loan.dueDate.getMonth()] %>, <%= // loan.dueDate.getFullYear() %></span> atau <span class="text-danger fw-bold"><%= // loan.remainingTime %> tersisa</span></p>
+                            <% // } if(loan.isLate === true) { %>
+                                <p class="mt-3">Peminjaman melewati masa tenggat, <span class="text-danger fw-bold">kembalikan buku segera mungkin</span></p>
+                            <% // } %> -->
+                        <% } else if(loan.isReturn === true) { %>
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-danger disabled">Buku Dikembalikan</button>
+                                <a href="/loan/<%= loan.book._id %>">
+                                    <button type="submit" class="btn btn-primary">Pinjam Buku Lagi</button>
+                                </a>
+                            </div>
+                            <% if(loan.isLate === false) { %>
+                                <p class="text-success mt-3">Anda mengembalikan buku sebelum masa tenggat</p>
+                            <% } else if(loan.isLate === true) { %>
+                                <p class="text-danger mt-3">Anda terlambat mengembalikan buku</p>
+                            <% } %>
+                        <% } %>
+                    <% } %>
+                <% } %>
+            <% } else if(loan.isApproved === 'reject') { %>
+                <button class="btn btn-danger disabled">Peminjaman Ditolak</button>
+            <% } else if(loan.isApproved === 'pending') { %>
+                <button class="btn btn-secondary disabled">Menunggu Persetujuan Admin</button>
+            <% } %>
+
+
+
+
+
+
+
+
+
+            
+        </div>
+    </div>
+</div>
+

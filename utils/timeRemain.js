@@ -1,5 +1,8 @@
 const moment = require('moment');
 
+// diff formula
+// masaDepan.diff(masaLalu/Saatini, 'unitWaktu');
+
 exports.remainingTime = (time) => {
     const minutesInDay = 1440;
     const minutesInHour = 60;
@@ -15,41 +18,37 @@ exports.remainingTime = (time) => {
             .replace('seconds', 'detik')
             .replace('a day', '1 hari')
             .replace('an hour', '1 jam');
-        return time.remainingTime = `${remainingTimeText}`
+        return time.remainingTime = `${remainingTimeText} tersisa`
+        // return task.timeLeft = `${timeLeftText} tersisa`
     }
-
-    if(remainingTime > 0) {
-        if (remainingTime > minutesInDay || remainingTime > minutesInHour) {
-            return time.remainingTime = timeConf();
-        } else {
-            return time.remainingTime = timeConf();
-        }
-    }
-}
-
-exports.countdownRejectLoan = (time, duration = "7") => {
-    const minutesInDay = 1440;
-    const minutesInHour = 60;
-
-    const now = moment();
-    const countdown = now.add(duration, 'days').fromNow();
-
-    const timeConf = () => {
-        let countdownText = dueDate.fromNow(true)
+    // Late time 
+    // Late time 
+    const calculateLateTime = (timeUnit) => {
+        const lateTime = moment.duration(Math.abs(remainingTime), 'minutes').humanize(false)
             .replace('days', 'hari')
             .replace('hours', 'jam')
             .replace('minutes', 'menit')
             .replace('seconds', 'detik')
             .replace('a day', '1 hari')
             .replace('an hour', '1 jam');
-        return time.countdown = `${countdownText}`
-    }
+        
+        return `<span class="text-danger">Terlambat ${lateTime}</span>`;
+    };
 
-    if(countdown > 0) {
-        // if (countdown > minutesInDay || countdown > minutesInHour) {
-        //     return time.countdown = timeConf();
+    if (remainingTime > 0) {
+        if (remainingTime > minutesInDay || remainingTime > minutesInHour) {
+            return timeConf();
+        } else {
+            return timeConf();
+        }
+    } else {
+        // if (remainingTime < 0) {
+        //     return calculateLateTime('minutes');
+        // } else if (remainingTime < 60) {
+        //     return calculateLateTime('hours');
         // } else {
-            return time.countdown = timeConf();
+        //     return calculateLateTime('days');
         // }
-    }
+        return calculateLateTime('days');
+    }    
 }

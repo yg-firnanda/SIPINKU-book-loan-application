@@ -1,33 +1,77 @@
 <div class="container">
-    <h1>Detail Loan</h1>
+    <h1 class="mt-3">Detail Peminjaman</h1>
     <hr>
-
-    <% loans.forEach(loan => { %>
-        <div class="row">
-            <div class="col-md-6">
-              <h5 class="card-title">Name: <%= loan.user.name %></h5>
-              <p class="card-text">Email: <%= loan.user.email %></p>
-            </div>
-            <div class="col-md-6">
-              <p class="card-text">Pekerjaan: <%= loan.user.role %></p>
-              <p class="card-text">Instansi: <%= loan.user.agency %></p>
-            </div>
+    <!-- MASIH BELUM DITANGANI -->
+    <% if(loan.isPaid === 'notPaid') { %>
+        <div class="alert alert-danger" role="alert">
+            Status Pembayaran Peminjam : <span class="fw-bold">Belum Dibayar</span>
         </div>
-
-    <div class="row mt-5">
+    <% } else if(loan.isPaid === 'paid') { %>
+        <div class="alert alert-success" role="alert">
+            Status Pembayaran Peminjam : <span class="fw-bold">Sudah Dibayar</span>
+        </div>
+        <% if(loan.isSent === 'dikemas') { %>
+            <div class="mt-4 mb-3 d-flex gap-3">
+                <form action="/admin/loans/detail/<%= loan._id %>" method="post">
+                    <button type="submit" class="btn btn-warning">Kirim Paket Sekarang</button>
+                </form>
+                <p class="mt-2 text-secondary">Paket sedang dikemas</p>
+            </div>
+        <% } else if(loan.isSent === 'dikirim') { %>
+            <div class="mt-4 mb-3 d-flex gap-3">
+                <form action="/admin/loans/detail/<% loan._id %>" method="post">
+                    <button type="submit" class="btn btn-warning disabled">Paket Sedang Dikirim</button>
+                </form>
+                <p class="mt-2 text-secondary">Mengirim paket ke peminjam buku</p>
+            </div>
+        <% } else if(loan.isSent === 'diterima') { %>
+            <% if(loan.isReturn === false) { %>
+                <% if(loan.isLate === false) { %>
+                    <div class="alert alert-warning" role="alert">
+                        Status Peminjaman: <span class="fw-bold">Belum Mengembalikan Buku dan Belum Melewati Masa Tenggat</span>
+                    </div>
+                <% } else { %>
+                    <div class="alert alert-danger" role="alert">
+                        Status Peminjaman: <span class="fw-bold">Belum Mengembalikan Buku dan Melewati Masa Tenggat</span>
+                    </div>
+                <% } %>
+            <% } else if(loan.isReturn === true) { %>
+                <% if(loan.isLate === false) { %>
+                    <div class="alert alert-warning" role="alert">
+                        Status Peminjaman: <span class="fw-bold">Sudah Mengembalikan Buku Sebelum Masa Tenggat</span>
+                    </div>
+                <% } else { %>
+                    <div class="alert alert-danger" role="alert">
+                        Status Peminjaman: <span class="fw-bold">Sudah Mengembalikan Buku Melewati Masa Tenggat</span>
+                    </div>
+                <% } %>
+            <% } %>
+        <% } %>
+    <% } %>
+    
+    <div class="row">
         <div class="col-md-6">
             <div class="img-box text-center">
-                <img src="<%= loan.book.cover_url %>" class="book-cover" alt="Book Cover | <%= loan.book.title %>">
+                <img src="<%= loan.book.cover_url %>" class="book-cover w-100" alt="Book Cover | <%= loan.book.title %>">
             </div>
         </div>
         <div class="col-md-6">
-            <h2><%= loan.book.title %></h2>
+            <h1 class="text-secondary">Data Buku : </h1><br>
+            <h3 class="fw-bold mb-3"><%= loan.book.title %></h3>
             <p><strong>Genre:</strong> <%= loan.book.genre %></p>
             <p><strong>Penulis:</strong> <%= loan.book.writer %></p>
             <p><strong>Deskripsi:</strong> <%= loan.book.description %></p>
             <p><strong>Penerbit:</strong> <%= loan.book.publisher %></p>
             <p><strong>Tahun Terbit:</strong> <%= loan.book.year_release %></p>
+            <hr>
+            <h1 class="text-secondary mb-5">Data Peminjam : </h1>
+            <h5 class="fw-bold mb-3"><%= loan.user.name %></h5>
+            <p>Email: <%= loan.user.email %></p>
+            <p>Pekerjaan: <%= loan.user.role %></p>
+            <p>Instansi: <%= loan.user.agency %></p>
+            <p>Alasan Meminjam Buku: <%= loan.descriptionOfNeeds ? loan.descriptionOfNeeds : '' %></p>
+            <p>Tenggat pengembalian: <span class="text-danger fw-bold"><%= loanDueDate %>, <%= loanDueTime %></span></p>
+        </div>
     </div>
-    <% }) %>
+</div>
 
-  </div>

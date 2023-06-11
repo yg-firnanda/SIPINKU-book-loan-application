@@ -38,3 +38,10 @@ app.use((req, res, next) => {
 - Add search book in admin and homepage
 - When loan dueDate is over the loan data will be removed in admin
 - Adding Oauth for user registration and login
+
+>>> TODO
+- homepage dashboard, and navigation
+- profile page (main-layout, profile.ejs, route, controller), include user wallet and loan history for payment
+- controll isPaid alert conditional when user already paid
+- isPaid in admin loans
+- approve and reject advance setting for user isPaid management

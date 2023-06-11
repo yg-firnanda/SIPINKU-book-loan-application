@@ -1,17 +1,18 @@
-<div class="container">
+<div class="container" style="margin-top: 9rem">
+    <h1 class="mb-4">Genre Buku: <%= bookGenre %></h1>
     <div class="row">
-        <% for(let book of books) { %>
-            <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="<%= book.cover_url %>" alt="<%= book.title %>">
+        <% books.forEach(book => { %>
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <img src="<%= book.cover_url %>" class="card-img-top" alt="Book 4" height="380">
                     <div class="card-body">
-                        <h5 class="card-title"><%= book.title %></h5>
-                        <span><%= book.year_release %></span>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="/book/<%= book._id %>" class="btn btn-primary">Detail</a>
+                        <a href="/book/<%= book._id %>" class="text-black text-decoration-none">
+                            <h5 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><%= book.title %></h5>
+                        </a>
+                        <p class="card-text"><%= book.writer %></p>
                     </div>
                 </div>
             </div>
-        <% } %>
+        <% }) %>
     </div>
 </div>

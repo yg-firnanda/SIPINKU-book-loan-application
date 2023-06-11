@@ -45,18 +45,23 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
     res.locals.user = req.user;
     res.locals.isAuthenticated = req.session.isLoggedIn;
+    res.locals.isFine = req.session.isFine;
     next();
 });
 
 require('./utils/database')
 const errorController = require('./controllers/errorController')
+const userRoutes = require('./routes/user')
 const bookRoutes = require('./routes/book');
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
+const pageRoutes = require('./routes/page')
 
 app.use(bookRoutes);
 app.use(authRoutes);
 app.use('/admin', adminRoutes);
+app.use(userRoutes);
+app.use(pageRoutes);
 
 app.get('*', errorController.get404);
 

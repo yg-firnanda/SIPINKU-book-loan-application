@@ -1,9 +1,9 @@
 
-<div class="container">
+<div class="container" style="margin-top: 9rem;">
     <div class="row mt-5">
         <div class="col-md-6">
             <div class="img-box text-center">
-                <img src="<%= book.cover_url %>" class="book-cover" alt="Book Cover | <%= book.title %>">
+                <img src="<%= book.cover_url %>" class="book-cover w-50" alt="Book Cover | <%= book.title %>">
             </div>
         </div>
         <div class="col-md-6">
@@ -13,16 +13,23 @@
             <p><strong>Deskripsi:</strong> <%= book.description %></p>
             <p><strong>Penerbit:</strong> <%= book.publisher %></p>
             <p><strong>Tahun Terbit:</strong> <%= book.year_release %></p>
-            <% if(loanApprove === true) { %>
-                <a href="/preview/">
-                    <button class="btn btn-success">Baca Buku</button>
-                </a>
-            <% } else if(loanApprove === false) { %>
-                <button class="btn btn-secondary">Tunggu 1 hari</button>
-            <% } else if(loanApprove === null) { %>
-                <a href="/loan/<%= book._id %>">
-                    <button class="btn btn-primary">Pinjam Buku</button>
-                </a>
+            <% console.log(isFine) %>
+            <% if(isFine === true) { %>
+                <div class="btn btn-secondary disabled">Bayar Denda Dahulu</div>
+            <% } else { %>
+                <% if(loanApprove === 'loan') { %>
+                    <a href="/loan/<%= book._id %>">
+                        <button class="btn btn-primary">Pinjam Buku</button>
+                    </a>
+                <% } else if(loanApprove === 'pending') { %>
+                    <button class="btn btn-secondary disabled">Menunggu persetujuan admin</button>
+                <% } else if(loanApprove === 'reject') { %>
+                    <button class="btn btn-secondary disabled">Pinjam lagi pada <%= timeADay %></button>
+                <% } else if(loanApprove === 'approve') { %>
+                    <a href="/loan/payment/<%= book._id %>">
+                        <button class="btn btn-success">Bayar Sekarang</button>
+                    </a>
+                <% } %>
             <% } %>
         </div>
     </div>

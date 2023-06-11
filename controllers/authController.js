@@ -9,7 +9,7 @@ exports.getSignup = (req, res) => {
 }
 
 exports.postSignup = (req, res) => {
-    const { name, email, role, agency, password, confPassword } = req.body;
+    const { name, email, role, agency, address, password, confPassword } = req.body;
     if (password === confPassword) {
         User.findOne({ email })
             .then(matchEmail => {
@@ -20,7 +20,7 @@ exports.postSignup = (req, res) => {
                 return bcrypt.hash(password, 12);
             })
             .then(hashedPassword => {
-                const user = new User({ name, email, role, agency, password: hashedPassword });
+                const user = new User({ name, email, role, agency, address, password: hashedPassword });
                 return user.save();
             })
             .then(result => {

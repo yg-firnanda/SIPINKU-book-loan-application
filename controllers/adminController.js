@@ -1,3 +1,4 @@
+const moment = require('moment')
 const Book = require('../models/Book');
 const Loan = require('../models/Loan');
 const { remainingTime } = require('../utils/timeRemain')
@@ -58,7 +59,7 @@ exports.getLoans = (req, res) => {
     .lean().exec()
     .then(loans => {
             loans.forEach(loan => {
-                remainingTime(loan);
+                loan.remainingTime = remainingTime(loan);
             });
             res.render('admin/user-loans', {
                 pageTitle: 'Loans Data',
@@ -70,32 +71,65 @@ exports.getLoans = (req, res) => {
 }
 
 exports.getLoansDetail = (req, res) => {
-    Loan.find()
+    const loanId = req.params.loanId;
+    Loan.findById(loanId)
     .populate('user', 'name email role instance')
     .populate('book', 'cover_url title writer genre description publisher year_release pages language')
     .exec()
-        .then(loans => {
+        .then(loan => {
+            const loanDueDate = moment(loan.dueDate).format('DD MMMM YYYY');
+            const loanDueTime = moment(loan.borrowDate).format('HH:mm')
             res.render('admin/detail-loans', {
                 pageTitle: 'Loans Data',
                 layout: 'layouts/admin-layout',
-                loans: loans
-            })
+                loan, loanDueDate, loanDueTime
+            });
+        })
+        .catch(err => console.log(err));
+}
+
+exports.postLoansDetail = (req, res) => {
+    const loanId = req.params.loanId;
+    Loan.findByIdAndUpdate(loanId, { isSent: 'dikirim' })
+        .then(loan => {
+            console.log("Paket sedang dikirim");
+            res.redirect(`/admin/loans/detail/${loan._id}`);
         })
         .catch(err => console.log(err));
 }
 
 exports.postApproveLoan = (req, res) => {
     const loanId = req.params.loanId;
-    Loan.findByIdAndUpdate(loanId, { isApproved: true })
-        .then(() => {
-            console.log("Peminjaman disetujui");
-            res.redirect('/admin/loans');
+    Loan.findByIdAndUpdate(loanId, { isApproved: "approve", isPaid: "notPaid" })
+        .then(loan => {
+            const currentTime = moment();
+            const paymentDuration = moment().add(1, 'day');
+            const paymentOneDay = paymentDuration.diff(currentTime)
+
+            if(paymentOneDay < 0) {
+                Loan.findByIdAndUpdate(loanId, { isPaid: 'cancel' })
+                    .then(() => {
+                        console.log("Durasi Pembayaran Habis");
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        res.status(500).send("Terjadi kesalahan saat memperbarui status peminjaman.");
+                    });
+            } else {
+                console.log("Peminjaman disetujui");
+                res.redirect('/admin/loans');
+            }
         })
-}
+        .catch(err => {
+            console.log(err);
+            res.status(500).send("Terjadi kesalahan saat memperbarui status peminjaman.");
+        });
+};
+
 
 exports.postRejectLoan = (req, res) => {
     const loanId = req.params.loanId;
-    Loan.findByIdAndUpdate(loanId, { isApproved: false })
+    Loan.findByIdAndUpdate(loanId, { isApproved: "reject" })
         .then(() => {
             console.log('Peminjaman buku ditolak');
             res.redirect('/admin/loans');

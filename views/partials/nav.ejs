@@ -1,22 +1,27 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container">
-        <a class="navbar-brand" href="/">Rent Book</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Contact</a>
-                </li>
-            </ul>
-            <div class="d-flex">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light position-fixed bg-white" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+        <div class="container">
+            <a href="/">
+                <img src="/images/logo.png" alt="" width="70">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pages/about">Tentang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pages/contact">Kontak</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/category">Kategori</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-nav ml-auto gap-3">
                 <% if(!isAuthenticated) { %>
                     <a href="/signup">
                         <button class="btn btn-primary">Signup</button>
@@ -25,12 +30,12 @@
                         <button class="btn btn-danger">Login</button>
                     </a>
                 <% } else { %>
-                    <h3><%= user.name %></h3>
-                    <form action="/logout" method="post">
-                        <button type="submit">logout</button>
-                    </form>
+                    <h5>Hello, <%= user.name %></h5>
+                    <a href="/profile/general">
+                        <img src="/images/user.png" alt="user-img" width="30">
+                    </a>
                 <% } %>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
+</header>

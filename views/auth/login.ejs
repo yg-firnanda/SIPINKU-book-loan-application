@@ -1,12 +1,22 @@
-<form action="/login" method="POST">
-    <div class="form-control">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email">
+<div class="center-div">
+    <div class="login-container h-100 d-flex align-items-center justify-content-center" style="width: 30%;">
+        <div class="card" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+            <div class="card-body">
+                <h3 class="card-title text-center mb-3">Login</h3>
+                <form action="/login" method="POST">
+                    <div class="form-group mb-3">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                    <p class="my-3">Anda admin perpustakaan? <a href="/login-admin">Login disini</a></p>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="form-control">
-        <label for="">Password</label>
-        <input type="password" name="password" id="password">
-    </div>
-    <p>Anda admin perpustakaan? <a href="/login-admin">Login disini</a></p>
-    <button type="submit">Login</button>
-</form>
+    <div class="bg-img login"></div>
+</div>

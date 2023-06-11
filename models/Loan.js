@@ -66,7 +66,10 @@ const loanSchema = new Schema({
             require: true
         }
     },
-    descriptionOfNeeds: String,
+    descriptionOfNeeds: {
+        type: String,
+        required: true
+    },
     borrowDate: {
         type: Date,
         required: true
@@ -75,7 +78,29 @@ const loanSchema = new Schema({
         type: Date,
         required: true
     },
-    isApproved: Boolean
+    isApproved: {
+        type: String,
+        enum: ['loan', 'pending', 'reject', 'approve'],
+        default: 'loan'
+    },
+    isPaid: {
+        type: String,
+        enum: ['null', 'paid', 'notPaid', 'cancel'],
+        default: 'null'
+    },
+    isSent: {
+        type: String,
+        enum: ['null', 'dikemas', 'dikirim', 'diterima'],
+        default: 'null'
+    },
+    isReturn: {
+        type: Boolean,
+        default: null
+    },
+    isLate: {
+        type: Boolean,
+        default: false
+    }
 });
 
 module.exports = mongoose.model('Loan', loanSchema);

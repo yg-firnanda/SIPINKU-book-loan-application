@@ -5,12 +5,133 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
     <title><%= pageTitle %></title>
+    <style type="text/css">
+        header > nav {
+            z-index: 100 !important;
+            width: 100% !important;
+            top: 0px;
+        }
+        body{
+            margin-top:20px;
+            overflow-x: hidden !important;
+            position: relative;
+        }
+
+        .header-perfect {
+            top: -20px !important;
+        }
+
+        #darken-image {
+            filter: brightness(0.5); /* Sesuaikan dengan tingkat kegelapan yang diinginkan */
+        }
+
+        .text-navy {
+            color: #1D267D;
+        }
+        .ui-w-80 {
+            width: 80px !important;
+            height: auto;
+        }
+
+    
+        .btn-default {
+            border-color: rgba(24,28,33,0.1);
+            background: rgba(0,0,0,0);
+            color: #4E5155;
+        }
+    
+        label.btn {
+            margin-bottom: 0;
+        }
+    
+        .btn-outline-primary {
+            border-color: #26B4FF;
+            background: transparent;
+            color: #26B4FF;
+        }
+    
+        .btn {
+            cursor: pointer;
+        }
+    
+        .text-light {
+            color: #babbbc !important;
+        }
+    
+        .btn-facebook {
+            border-color: rgba(0,0,0,0);
+            background: #3B5998;
+            color: #fff;
+        }
+    
+        .btn-instagram {
+            border-color: rgba(0,0,0,0);
+            background: #000;
+            color: #fff;
+        }
+    
+        .card {
+            background-clip: padding-box;
+            box-shadow: 0 1px 4px rgba(24,28,33,0.012);
+        }
+    
+        .row-bordered {
+            overflow: hidden;
+        }
+    
+        .account-settings-fileinput {
+            position: absolute;
+            visibility: hidden;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+        }
+        .account-settings-links .list-group-item.active {
+            font-weight: bold !important;
+        }
+        html:not(.dark-style) .account-settings-links .list-group-item.active {
+            background: transparent !important;
+        }
+        .account-settings-multiselect ~ .select2-container {
+            width: 100% !important;
+        }
+        .light-style .account-settings-links .list-group-item {
+            padding: 0.85rem 1.5rem;
+            border-color: rgba(24, 28, 33, 0.03) !important;
+        }
+        .light-style .account-settings-links .list-group-item.active {
+            color: #4e5155 !important;
+        }
+        .material-style .account-settings-links .list-group-item {
+            padding: 0.85rem 1.5rem;
+            border-color: rgba(24, 28, 33, 0.03) !important;
+        }
+        .material-style .account-settings-links .list-group-item.active {
+            color: #4e5155 !important;
+        }
+        .dark-style .account-settings-links .list-group-item {
+            padding: 0.85rem 1.5rem;
+            border-color: rgba(255, 255, 255, 0.03) !important;
+        }
+        .dark-style .account-settings-links .list-group-item.active {
+            color: #fff !important;
+        }
+        .light-style .account-settings-links .list-group-item.active {
+            color: #4E5155 !important;
+        }
+        .light-style .account-settings-links .list-group-item {
+            padding: 0.85rem 1.5rem;
+            border-color: rgba(24,28,33,0.03) !important;
+        }
+    </style>
 </head>
 <body>
     <%- include('../partials/nav.ejs') %>
     <%- body %>
     <%- include('../partials/footer.ejs') %>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/  bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
 </body>

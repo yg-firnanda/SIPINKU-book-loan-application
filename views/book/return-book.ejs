@@ -1,0 +1,74 @@
+<div class="container" style="margin-top: 9rem;">
+    <div class="row">
+        <div class="col-md-8">
+            <!-- Form Feedback -->
+            <form action="#" method="post">
+                <h3>Form Pengembalian Buku</h3>
+                <div class="form-group mb-3">
+                    <label for="nama">Nama Saya</label>
+                    <input type="text" name="name" id="nama" value="" class="form-control" disabled>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="service">Penilaian Pelayanan:</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="service" id="excellent-service" value="excellent">
+                        <label class="form-check-label" for="excellent-service">Luar Biasa</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="service" id="good-service" value="good">
+                        <label class="form-check-label" for="good-service">Puas</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="service" id="average-service" value="average">
+                        <label class="form-check-label" for="average-service">Cukup Puas</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="service" id="poor-service" value="poor">
+                        <label class="form-check-label" for="poor-service">Kurang Puas</label>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="service2">Penilaian Pengalaman Penggunaan:</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="service2" id="excellent-service" value="excellent">
+                        <label class="form-check-label" for="excellent-service">Luar Biasa</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="service2" id="good-service" value="good">
+                        <label class="form-check-label" for="good-service">Puas</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="service2" id="average-service" value="average">
+                        <label class="form-check-label" for="average-service">Cukup Puas</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="service2" id="poor-service" value="poor">
+                        <label class="form-check-label" for="poor-service">Kurang Puas</label>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="feedback">Feedback:</label>
+                    <textarea class="form-control" id="feedback" rows="5"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-4 mb-4">Kembalikan Buku Sekarang</button>
+                <div class="alert alert-warning">
+                    <span class="fw-bold">PENTING</span><br>
+                    Kurir kami akan datang ke alamat Anda untuk mengambil buku yang akan dikembalikan. Anda telah membayar ongkos kirim diawal untuk peminjaman serta pengembalian buku.
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <!-- Data Buku -->
+            <h3>Data Buku</h3>
+            <div class="card">
+            <img class="card-img-top" src="<%= loan.book.cover_url %>" alt="<%= loan.book.title %>">
+            <div class="card-body">
+                <h5 class="card-title"><%= loan.book.title %> (<%= loan.book.year_release %>)</h5>
+                <p class="card-text">Author: <%= loan.book.writer %></p>
+                <p class="card-text">Genre: <%= loan.book.genre %></p>
+                <!-- Other book data fields -->
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

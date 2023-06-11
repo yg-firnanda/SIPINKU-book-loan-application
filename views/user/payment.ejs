@@ -1,0 +1,44 @@
+<!-- https://cdn.dribbble.com/users/2153376/screenshots/17065240/media/f3ca358983c4cb9b030f52b55fcb1bde.jpg?compress=1&resize=400x300&vertical=center -->
+<div class="container mb-5" style="margin-top: 9rem;">
+    <div class="row">
+        <div class="col-md-8 ">
+            <div class="d-flex justify-content-between w-100">
+                <h2>Form Pembayaran</h2>
+                <div>
+                    <span>Total tagihan saya:</span>
+                    <h3 class="text-danger fw-bold">Rp20.900</h3>
+                </div>
+            </div>
+            <form action="/loan/payment/<%= loan._id %>" method="POST">
+                <div class="form-group mb-3">
+                    <label for="rekening">Nomor Rekening</label>
+                    <input type="number" class="form-control" name="nomor-rekening" id="rekening" placeholder="Masukkan nomor rekening">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="nama">Nama Pemilik Kartu</label>
+                    <input type="text" class="form-control" id="nama" name="pemilik-rekening" placeholder="Masukkan nama pemilik kartu">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="alamat">Alamat Penagihan</label>
+                    <textarea class="form-control" id="alamat" rows="4" name="address-bill" placeholder="Masukkan alamat penagihan"></textarea>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="jumlah">Jumlah Pembayaran</label>
+                    <input type="number" class="form-control" name="bill-payment" id="jumlah" placeholder="Masukkan jumlah pembayaran">
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-3">Bayar</button>
+            </form>
+        </div>        
+        <div class="col-md-4">
+            <div class="card">
+                <img src="<%= loan.book.cover_url %>" class="card-img-top" alt="Cover Buku">
+                <div class="card-body">
+                    <h5 class="card-title"><%= loan.book.title %> (<%= loan.book.year_release %>)</h5>
+                    <p class="card-text">Penulis: <%= loan.book.writer %></p>
+                    <p class="card-text">Genre: <%= loan.book.genre %></p>
+                    <p class="card-text">Deskripsi: <%= loan.book.description %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
