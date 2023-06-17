@@ -78,7 +78,7 @@ exports.getLoansDetail = (req, res) => {
     .exec()
         .then(loan => {
             const loanDueDate = moment(loan.dueDate).format('DD MMMM YYYY');
-            const loanDueTime = moment(loan.borrowDate).format('HH:mm')
+            const loanDueTime = moment(loan.borrowDate).format('HH:mm');
             res.render('admin/detail-loans', {
                 pageTitle: 'Loans Data',
                 layout: 'layouts/admin-layout',
@@ -100,25 +100,34 @@ exports.postLoansDetail = (req, res) => {
 
 exports.postApproveLoan = (req, res) => {
     const loanId = req.params.loanId;
-    Loan.findByIdAndUpdate(loanId, { isApproved: "approve", isPaid: "notPaid" })
-        .then(loan => {
-            const currentTime = moment();
-            const paymentDuration = moment().add(1, 'day');
-            const paymentOneDay = paymentDuration.diff(currentTime)
+    const currentTime = moment();
+    const paymentDuration = moment().add(1, 'day');
+    const remainingTime = paymentDuration.diff(currentTime);
 
-            if(paymentOneDay < 0) {
-                Loan.findByIdAndUpdate(loanId, { isPaid: 'cancel' })
-                    .then(() => {
-                        console.log("Durasi Pembayaran Habis");
+    Loan.findByIdAndUpdate(loanId, { isApproved: "approve", isPaid: "notPaid" })
+        .then(() => {
+            console.log("Peminjaman disetujui");
+            res.redirect('/admin/loans');
+
+            setTimeout(() => {
+                Loan.findById(loanId)
+                    .then(loan => {
+                        if (loan.isPaid === 'notPaid') {
+                            Loan.findByIdAndUpdate(loanId, { isPaid: 'cancel' })
+                                .then(() => {
+                                    console.log("Peminjaman otomatis dibatalkan");
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                    res.status(500).send("Terjadi kesalahan saat memperbarui status peminjaman.");
+                                });
+                        }
                     })
                     .catch(err => {
                         console.log(err);
-                        res.status(500).send("Terjadi kesalahan saat memperbarui status peminjaman.");
+                        res.status(500).send("Terjadi kesalahan saat memeriksa status peminjaman.");
                     });
-            } else {
-                console.log("Peminjaman disetujui");
-                res.redirect('/admin/loans');
-            }
+            }, remainingTime);
         })
         .catch(err => {
             console.log(err);

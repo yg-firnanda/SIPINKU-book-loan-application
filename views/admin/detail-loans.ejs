@@ -47,6 +47,10 @@
                 <% } %>
             <% } %>
         <% } %>
+    <% } else if(loan.isPaid === 'cancel') { %>
+        <div class="alert alert-danger" role="alert">
+            Status Pembayaran Peminjam : <span class="fw-bold">Dibatalkan</span>
+        </div>
     <% } %>
     
     <div class="row">

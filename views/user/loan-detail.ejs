@@ -22,10 +22,10 @@
                     <button class="btn btn-danger" disabled>Dibatalkan</button>
                 <% } else if(loan.isPaid === 'paid') { %>
                     <% if(loan.isSent === 'dikemas') { %>
-                        <button class="btn btn-warning disabled">Sedang Diproses</button>
+                        <button class="btn btn-warning" disabled>Sedang Diproses</button>
                     <% } else if(loan.isSent === 'dikirim') { %>
                         <div class="d-flex gap-3">
-                            <button class="btn btn-warning disabled">Sedang Dikirim</button>
+                            <button class="btn btn-warning" disabled>Sedang Dikirim</button>
                             <form action="/loan/detail/<%= loan._id %>" method="POST">
                                 <button type="submit" class="btn btn-primary">Konfirmasi Buku Sudah Sampai</button>
                             </form>
@@ -44,9 +44,15 @@
                         <% } else if(loan.isReturn === true) { %>
                             <div class="d-flex gap-3">
                                 <button class="btn btn-danger disabled">Buku Dikembalikan</button>
-                                <a href="/loan/<%= loan.book._id %>">
-                                    <button type="submit" class="btn btn-primary">Pinjam Buku Lagi</button>
-                                </a>
+                                <% if(loan.isLate === false ) { %>
+                                    <% if(!isFine) { %>
+                                        <a href="/loan/<%= loan.book._id %>">
+                                            <button type="submit" class="btn btn-primary">Pinjam Buku Lagi</button>
+                                        </a>
+                                    <% } else if(isFine) { %>
+                                        <div class="btn btn-secondary disabled">Bayar Denda Dahulu</div>
+                                    <% } %>
+                                <% } %>
                             </div>
                             <% if(loan.isLate === false) { %>
                                 <p class="text-success mt-3">Anda mengembalikan buku sebelum masa tenggat</p>

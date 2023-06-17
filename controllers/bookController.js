@@ -73,8 +73,6 @@ exports.getBook = (req, res) => {
             sameDay: '[hari ini pukul] HH:mm',
             nextDay: '[besok pada pukul] HH:mm'
         });
-
-        isFine = req.user ? req.user.isFine : null;
         
         res.render('book/book', {
             pageTitle: "Detail Page",
@@ -82,7 +80,7 @@ exports.getBook = (req, res) => {
             path: `/book/${matchBook._id}`,
             book: matchBook,
             loanApprove: loan ? loan.isApproved : "loan",
-            timeADay, isFine
+            timeADay, 
         });
     })
     .catch(err => console.log(err));

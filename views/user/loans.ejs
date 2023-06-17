@@ -24,6 +24,7 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Judul Buku</th>
+                                            <th scope="col">Tenggat Waktu</th>
                                             <th scope="col">Status</th>
                                             <th scope="col" class="text-center">Pembayaran</th>
                                             <th scope="col">Aksi</th>
@@ -36,6 +37,12 @@
                                                 <tr>
                                                     <th scope="row"><%= i %></th>
                                                     <td><%= loan.book.title %></td>
+                                                    <% if(loan.isReturn === true) { %>
+                                                        <td class="text-success">Peminjaman Selesai</td>
+                                                    <% } else { %>
+                                                        <% const months = ['Januari', 'Februari','Maret', 'April', 'Mei', 'Juni', 'Juli','Agustus', 'September', 'Oktober', 'November', 'Desember']; %>
+                                                        <td><%= loan.dueDate.getDate() %> <%= months[loan.dueDate.getMonth()] %>, <%= loan.dueDate.getFullYear() %></td>
+                                                    <% } %>
                                                     <% if(loan.isApproved === 'pending') { %>
                                                         <td class="text-secondary"><%= loan.isApproved %></td>
                                                         <td class="text-center">-</td>
@@ -49,7 +56,7 @@
                                                         <% } else if(loan.isPaid === 'notPaid') { %>
                                                             <td class="text-danger text-center">Belum Bayar</td>
                                                         <% } else if(loan.isPaid === 'cancel') { %>
-                                                            <td class="badge bg-danger text-center">Batal</td>
+                                                            <td class="badge bg-danger text-center">Dibatalkan</td>
                                                         <% } else { %>
                                                             <td class="text-center">-</td>
                                                         <% } %>

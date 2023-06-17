@@ -13,10 +13,8 @@
             <p><strong>Deskripsi:</strong> <%= book.description %></p>
             <p><strong>Penerbit:</strong> <%= book.publisher %></p>
             <p><strong>Tahun Terbit:</strong> <%= book.year_release %></p>
-            <% console.log(isFine) %>
-            <% if(isFine === true) { %>
-                <div class="btn btn-secondary disabled">Bayar Denda Dahulu</div>
-            <% } else { %>
+            <%= console.log(isFine) %>
+            <% if(!isFine) { %>
                 <% if(loanApprove === 'loan') { %>
                     <a href="/loan/<%= book._id %>">
                         <button class="btn btn-primary">Pinjam Buku</button>
@@ -30,6 +28,8 @@
                         <button class="btn btn-success">Bayar Sekarang</button>
                     </a>
                 <% } %>
+            <% } else if(isFine) { %>
+                <div class="btn btn-secondary disabled">Bayar Denda Dahulu</div>
             <% } %>
         </div>
     </div>
