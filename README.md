@@ -64,4 +64,7 @@ If you would like to contribute to the Node.js Book Rental project, please follo
 <li>Your contributions will be greatly appreciated in enhancing the Node.js Book Rental project and providing an exceptional book rental experience for users.</li>
 </ol>
 
+## Preview
+![screenshot-homepage](https://github.com/yg-firnanda/SIPINKU-book-loan-application/assets/82860149/0255d19e-a085-4f07-8feb-20ac409b1e40)
+
 Thank you for your interest and participation in the Node.js Book Rental project!
